@@ -20,13 +20,6 @@ During `COMPUTE`, column *k* of A and row *k* of B are streamed in together
 aligned pair `A[i][k]` and `B[k][j]` at cycle `t_0 + i + j + k`, so it
 accumulates the full dot product `Σ_k A[i][k] · B[k][j] = C[i][j]`.
 
-> Note on terminology: the original spec calls this "weight-stationary".
-> The PE here accumulates per-PE (spec-compliant), and B is latched into a
-> register in the PE each cycle — during `COMPUTE` the value at each PE
-> changes with the stream, which is the dataflow that actually yields a
-> correct 8×8 matmul with per-PE accumulators. The `LOAD_SKEW` phase still
-> exists to clear accumulators and prime the skew pipelines.
-
 ## Modules
 
 | File                       | Role                                        |
